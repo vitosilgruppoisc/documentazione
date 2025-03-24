@@ -1,0 +1,532 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "otp-service documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/otp/closeAllSku": {
+      "put": {
+        "tags": [
+          "otp-controller"
+        ],
+        "summary": "Close All Skus (only SuperAdmin)",
+        "operationId": "closeAllSkus",
+        "responses": {
+          "401": {
+            "description": "Unauthorized Access",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "200": {
+            "description": "All SKUs closed"
+          }
+        }
+      }
+    },
+    "/api/otp/closeAllSkuUsername": {
+      "put": {
+        "tags": [
+          "otp-controller"
+        ],
+        "summary": "Close All Skus for Username",
+        "operationId": "closeSkuForUsername",
+        "responses": {
+          "200": {
+            "description": "All SKUs closed for username"
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/visualize": {
+      "post": {
+        "tags": [
+          "otp-controller"
+        ],
+        "summary": "Visualize QR Code",
+        "description": "La username viene presa dall'header",
+        "operationId": "visualizeQrCode",
+        "responses": {
+          "401": {
+            "description": "Unauthorized Access",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "200": {
+            "description": "Successfully visualized QR Code",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/QrCodeResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/verify": {
+      "post": {
+        "tags": [
+          "otp-controller"
+        ],
+        "summary": "Verify SKU",
+        "description": "La username viene estratta dall'header",
+        "operationId": "verifySku",
+        "responses": {
+          "200": {
+            "description": "Verifica SKU eseguita",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkuVerificationResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/validate": {
+      "post": {
+        "tags": [
+          "otp-controller"
+        ],
+        "summary": "Validate Operation",
+        "operationId": "validate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpValidateRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Validazione eseguita",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpValidateResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/sign": {
+      "post": {
+        "tags": [
+          "history-sign-controller"
+        ],
+        "summary": "Sign Operation",
+        "operationId": "sign",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSignDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/otp/feedback": {
+      "post": {
+        "tags": [
+          "otp-controller"
+        ],
+        "summary": "Feedback Operation",
+        "operationId": "verify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpFeebackRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback ricevuto e salvato"
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/otp/create": {
+      "post": {
+        "tags": [
+          "otp-controller"
+        ],
+        "summary": "Create QR Code",
+        "operationId": "generate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpCreateRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created QR Code",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpCreateResponseDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "QrCodeResponseDTO": {
+        "type": "object",
+        "properties": {
+          "qrCode": {
+            "type": "string"
+          }
+        }
+      },
+      "SkuVerificationResponseDTO": {
+        "type": "object",
+        "properties": {
+          "present": {
+            "type": "boolean"
+          },
+          "valid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OtpValidateRequestDTO": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "string"
+          },
+          "otp": {
+            "type": "string"
+          }
+        }
+      },
+      "OtpValidateResponseDTO": {
+        "type": "object",
+        "properties": {
+          "uuidValidation": {
+            "type": "string"
+          },
+          "validated": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RequestSignDTO": {
+        "type": "object",
+        "properties": {
+          "otp": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "allegati": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OtpFeebackRequestDTO": {
+        "type": "object",
+        "properties": {
+          "uuidValidation": {
+            "type": "string"
+          },
+          "json": {
+            "type": "string"
+          }
+        }
+      },
+      "OtpCreateRequestDTO": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileCoded": {
+            "type": "string"
+          }
+        }
+      },
+      "OtpCreateResponseDTO": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrCode": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      }
+    }
+  }
+}
